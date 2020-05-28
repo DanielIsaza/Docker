@@ -1,0 +1,10 @@
+pgadmin:
+ image: dpage/pgadmin4:latest
+ restart: always
+ environment:
+     - 'PGADMIN_DEFAULT_EMAIL=admin'
+     - 'PGADMIN_DEFAULT_PASSWORD=123'
+ volumes:
+     - ./pgadmin:/var/lib/pgadmin
+ ports:
+     - 82:80     

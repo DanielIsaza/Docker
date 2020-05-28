@@ -1,0 +1,33 @@
+version: '3.1'
+
+services:
+
+ app:
+   image: fauria/lap
+   restart: always
+   volumes: 
+     - ./app/html:/var/www/html
+     - ./app/log:/var/log
+   ports:
+     - 80:80
+   links:
+     - db:postgres
+     - dbedu:postgres
+ db:
+  image: postgres
+  restart: always
+  environment:
+   POSTGRES_PASSWORD: 123
+  volumes:
+    - ./postgres-data:/var/lib/postgresql/data
+  ports:
+    - 5432:5432
+ dbedu:
+  image: postgres
+  restart: always
+  environment:
+   POSTGRES_PASSWORD: 123
+  volumes:
+    - ./postgres-data:/var/lib/postgres-dataEdu/data
+  ports:
+    - 5433:5432
