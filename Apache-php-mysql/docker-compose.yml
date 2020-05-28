@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+    mysql:
+        image: mysql:5.7
+        environment: 
+            - MYSQL_DATABASE=curriculocidba
+            - MYSQL_ROOT_PASSWORD=123
+            - MYSQL_USER=curriculo
+            - MYSQL_PASSWORD=123
+        volumes:
+            - ./db:/var/lib/mysql
+        expose:
+            - 3306
+    php:
+        build: ./config_httpd 
+        volumes:
+            - ./web:/var/www/html
+        expose:
+            - 80
+        ports:
+            - 80:80
+        links:
+            - mysql
